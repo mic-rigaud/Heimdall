@@ -3,6 +3,7 @@ import sys
 import subprocess
 import logging
 from lib import network
+import threading
 
 ##############################################################################################################
 # Logger
@@ -15,14 +16,17 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 ##############################################################################################################
 
-def osCheckCall(commande):
-    try:
-        return subprocess.check_call(commande, shell=True)
-    except:
-        logger.critical("Erreur lors de la commande: " + commande)
 
 
 
+class Ping(threading.Thread):
+    def __init__(self,host):
+        threading.Thread.__init__(self)
+        self.host = host
+
+    def run(self):
+        if network.ping(str(self.host)):
+            print(self.host)
 
 
 
@@ -30,11 +34,9 @@ def main():
     logger.info("Initialisation du service")
     print('--------------------')
     for adresse in network.liste_address():
-        print(adresse)
-    if network.ping("192.168.1.1"):
-        print("OK")
-    else:
-        print("pas ok")
+        th = Ping(adresse)
+        th.start()
+
 
 
 if __name__=="__main__":
