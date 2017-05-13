@@ -1,42 +1,42 @@
-import os
-import sys
-import subprocess
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+'''
+ Heimdall
+  auteurs: michael
+  version: 0.1
+  date: 13/05/2017
+'''
+
 import logging
-from lib import network
 import threading
+from Heimdall.lib import network
+from Heimdall.lib import myjson
 
-##############################################################################################################
-# Logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-handler = logging.FileHandler('log/hello.log')
-handler.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-##############################################################################################################
+logging.basicConfig(filename='/home/michael/Documents/Programation/Heimdall/log/heimdall.log',
+                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-
+NETWORKSTATUS = {}
 
 
 class Ping(threading.Thread):
-    def __init__(self,host):
+    '''
+    Ping: Cette classe permet de réaliser les ping sur les différents host
+    '''
+    def __init__(self, host):
         threading.Thread.__init__(self)
         self.host = host
 
     def run(self):
         if network.ping(str(self.host)):
-            print(self.host)
-
+            NETWORKSTATUS[str(self.host)] = True
 
 
 def main():
-    logger.info("Initialisation du service")
-    print('--------------------')
+    logging.info("Démarage du service")
     for adresse in network.liste_address():
         th = Ping(adresse)
         th.start()
-
+    myjson.write("monjson.json",NETWORKSTATUS)
 
 
 if __name__=="__main__":
