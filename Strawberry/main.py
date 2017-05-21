@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 '''
- Heimdall
+ Strawberry
   auteurs: michael
   version: 0.1
   date: 13/05/2017
@@ -9,10 +9,10 @@
 
 import logging
 import threading
-from Heimdall.lib import network
-from Heimdall.lib import myjson
+from Strawberry.lib import network
+from Strawberry.lib import myjson
 
-logging.basicConfig(filename='/home/michael/Documents/Programation/Heimdall/log/heimdall.log',
+logging.basicConfig(filename='/home/michael/Documents/Programation/Strawberry/log/heimdall.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 NETWORKSTATUS = {}

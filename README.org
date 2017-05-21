@@ -1,4 +1,4 @@
-* Heimdall
+* Strawberry
 
 ** Description
 
@@ -31,4 +31,6 @@
 
 ** FAQ
 *** Pourquoi ce nom?
-    Dans la mythologie Scandinave, Heimdall est le gardien du Bifröst qui sépare Asgard des mondes inférieurs. C'est lui qui doit veiller a ce qu'aucun intrus ne permettre dans le monde des Dieux. C'est donc un nom tout trouvé pour cet analyseur de réseaux.
+    Ce nom a été choisi pour deux raisons:
+    - Premièrement, Strawberry veux dire fraise en anglais, et on peut dire vulgairement que ce logiciel va "ramener sa fraise sur le réseaux".
+    - Deuxièmement, Ce logiciel à pour but d'être installé sur un raspberry. Et les gâteau à la fraise et au framboises restent les meilleurs!
