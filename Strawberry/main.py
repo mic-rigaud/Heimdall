@@ -8,35 +8,26 @@
 '''
 
 import logging
-import threading
+import time
 from Strawberry.lib import network
 from Strawberry.lib import myjson
 
 logging.basicConfig(filename='/home/michael/Documents/Programation/Strawberry/log/heimdall.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-NETWORKSTATUS = {}
-
-
-class Ping(threading.Thread):
-    '''
-    Ping: Cette classe permet de réaliser les ping sur les différents host
-    '''
-    def __init__(self, host):
-        threading.Thread.__init__(self)
-        self.host = host
-
-    def run(self):
-        if network.ping(str(self.host)):
-            NETWORKSTATUS[str(self.host)] = True
-
+NETWORKSTATUS = myjson.myjson()
+NETWORKSTATUS.read("monjson.json")
 
 def main():
     logging.info("Démarage du service")
-    for adresse in network.liste_address():
-        th = Ping(adresse)
-        th.start()
-    myjson.write("monjson.json",NETWORKSTATUS)
+    a=0
+    while a<100:
+        network_status = network.scan()
+        NETWORKSTATUS.load(network_status)
+        NETWORKSTATUS.write("monjson.json")
+        a=a+1
+        time.sleep(1)
+    logging.info("Fin du service")
 
 
 if __name__=="__main__":

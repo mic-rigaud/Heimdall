@@ -7,6 +7,6 @@ setup(
     include_package_data=True,
     entry_points='''
         [console_scripts]
-        heimdall=Strawberry.main:main
+        strawberry=Strawberry.main:main
     ''',
 )
