@@ -9,24 +9,33 @@
 
 import logging
 import time
+import yaml
 from Strawberry.lib import network
-from Strawberry.lib import myjson
+from Strawberry.lib import myyaml
 
 logging.basicConfig(filename='/home/michael/Documents/Programation/Strawberry/log/heimdall.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-NETWORKSTATUS = myjson.myjson()
-NETWORKSTATUS.read("monjson.json")
+NETWORKSTATUS = myyaml.myyaml()
+FICHIER_OUTPUT = "output.yaml"
+FICHIER_CONFIG = "config/strawberry.yaml"
+NETWORKSTATUS.read(FICHIER_OUTPUT)
+try:
+    with open(FICHIER_CONFIG) as outline:
+        CONFIG = yaml.load(outline)
+except Exception as e:
+    logging.error("Erreur lors de la lecture du fichier yaml. Message d'erreur: " + str(e))
+
 
 def main():
     logging.info("Démarage du service")
     a=0
-    while a<100:
+    while a<1:
         network_status = network.scan()
         NETWORKSTATUS.load(network_status)
-        NETWORKSTATUS.write("monjson.json")
+        NETWORKSTATUS.write(FICHIER_OUTPUT)
         a=a+1
-        time.sleep(1)
+        time.sleep(CONFIG["time"])
     logging.info("Fin du service")
 
 

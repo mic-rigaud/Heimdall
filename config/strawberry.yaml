@@ -1,0 +1,7 @@
+# FICHIER DE CONFIGURATION DE STRAWBERRY
+
+# Valeur possible: ping, nmap, arp
+type_of_detection: ping
+
+# Temps entre deux scans en seconde
+time: 5
