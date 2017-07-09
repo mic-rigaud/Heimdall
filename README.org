@@ -2,7 +2,7 @@
 
 ** Description
 
-   Cet outil permet d'administrer un réseau local. Il permet de donner un aperçut de l'ensemble des machines présentes sur le réseau. A termes, cet outil donnera une interface d'administration web cartographiant le réseau et alertant lorsqu'il y aura un nouvelle utilisateur dans le réseau. Une analyse par scan de port permettra de donner un niveau de sécurité des machines présentes.
+   Cet outil permet d'administrer un réseau local. Il permet de donner un aperçu de l'ensemble des machines présentes sur le réseau. A termes, cet outil donnera une interface d'administration web cartographiant le réseau et alertant lorsqu'il y aura un nouvel utilisateur dans le réseau. Une analyse par scan de port permettra de donner un niveau de sécurité des machines présentes.
 
    Cet outil utilisera pour réaliser l'analyse:
    - ping
