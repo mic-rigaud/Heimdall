@@ -33,4 +33,4 @@
 *** Pourquoi ce nom?
     Ce nom a été choisi pour deux raisons:
     - Premièrement, Strawberry veux dire fraise en anglais, et on peut dire vulgairement que ce logiciel va "ramener sa fraise sur le réseaux".
-    - Deuxièmement, Ce logiciel à pour but d'être installé sur un raspberry. Et les gâteau à la fraise et au framboises restent les meilleurs!
+    - Deuxièmement, Ce logiciel à pour but d'être installé sur un raspberry. Et les gâteau à la fraise et aux framboises restent les meilleurs!
