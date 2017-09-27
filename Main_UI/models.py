@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class NetworkDatabase(models.Model):
     ip = models.CharField(max_length=100)
     mac = models.CharField(max_length=100)
