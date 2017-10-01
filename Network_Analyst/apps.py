@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-
-
-class NetworkAnalystConfig(AppConfig):
-    name = 'Network_Analyst'
+import threading
+import netifaces as ni
+import ipaddress
+import time

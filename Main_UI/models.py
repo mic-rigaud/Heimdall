@@ -10,3 +10,7 @@ class NetworkDatabase(models.Model):
 
     def __unicode__(self):
         return "{0} [{1}] [{2}] [{3}] [{4}]".format( self.ip, self.mac, self.time_last, self.confiance, self.statut)
+
+# class Settings(models.Model):
+#     email = models.CharField(max_length=100)
+#     interval_scan = models.CharField(max_length=100)

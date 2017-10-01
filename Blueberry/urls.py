@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from Main_UI import views as Main_UI
+from Network_Analyst import views as Network_Analyst
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^$', Main_UI.home, name='home'),
+    url(r'^settings/$', Main_UI.settings, name='settings'),
+    url(r'^task/$', Network_Analyst.tasks, name='task')
     # url(r'^network_analyst/', include('Network_Analyst.urls')),
 ]

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="table" >
+    <thead>
+        <tr>
+            <th>IP</th>
+            <th>MAC</th>
+            <th>Heure de la derniere observation</th>
+            <th>Confiance</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for element in database %}
+        <tr>
+            <th>{{ element.ip }}</th>
+            <th>{{ element.mac }}</th>
+            <th>{{ element.time_last }}</th>
+            <th>{{ element.confiance }}</th>
+            <th>{{ element.statut }}</th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
