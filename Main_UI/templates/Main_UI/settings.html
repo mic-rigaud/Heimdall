@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<form class="form-horizontal col-lg-6">
+    <div class="form-group">
+        <legend>Paramètres :</legend>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="email" class="col-lg-2">Email : </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="email" value="{{ email }}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="send_email" class="col-lg-2">Envoyer un email : </label>
+            <div class="col-lg-10">
+                <select id="send_email" class="form-control" >
+                    <option>Oui</option>
+                    <option>Non</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Envoyer</button>
+</form>
+    {% endblock %}

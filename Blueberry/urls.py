@@ -21,6 +21,8 @@ from Network_Analyst import views as Network_Analyst
 urlpatterns = [
     url(r'^$', Main_UI.home, name='home'),
     url(r'^settings/$', Main_UI.settings, name='settings'),
-    url(r'^task/$', Network_Analyst.tasks, name='task')
+    url(r'^task/$', Network_Analyst.tasks, name='task'),
+    url(r'^about/$', Main_UI.about, name='about'),
+    url(r'^delete/(?P<ip_d>.+)/(?P<mac_d>.+)$', Main_UI.delete_entry, name='delete')
     # url(r'^network_analyst/', include('Network_Analyst.urls')),
 ]

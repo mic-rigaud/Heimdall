@@ -1,25 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<table class="table" >
-    <thead>
-        <tr>
-            <th>IP</th>
-            <th>MAC</th>
-            <th>Heure de la derniere observation</th>
-            <th>Confiance</th>
-            <th>Statut</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for element in database %}
-        <tr>
-            <th>{{ element.ip }}</th>
-            <th>{{ element.mac }}</th>
-            <th>{{ element.time_last }}</th>
-            <th>{{ element.confiance }}</th>
-            <th>{{ element.statut }}</th>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+<div class="container" >
+    <div class="row" >
+        <div class="col-lg-11" >
+        </div>
+        <div class="col-lg-1" >
+            <a class="btn btn-info " href="{% url 'task' %}"><span class="glyphicon glyphicon-search"></span></a>
+        </div>
+    </div>
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>IP</th>
+                <th>MAC</th>
+                <th>Heure de la derniere observation</th>
+                <th>Confiance</th>
+                <th>Activité</th>
+                <th>Supprimé?</th>
+        </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for element in database %}
+            <tr>
+                <th>{{ element.ip }}</th>
+                <th>{{ element.mac }}</th>
+                <th>{{ element.time_last }}</th>
+                <th>{{ element.confiance }}</th>
+                <th>{{ element.statut }}</th>
+                <th><a class="btn btn-danger " href="{% url 'delete' element.ip element.mac %}"><span class="glyphicon glyphicon-remove"></span></a></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

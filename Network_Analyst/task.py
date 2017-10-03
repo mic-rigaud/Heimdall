@@ -12,7 +12,7 @@ import re
 logger = getLogger(__name__)
 
 FNULL = open(os.devnull, 'w')
-INTERFACE = 'eth0'
+INTERFACE = 'wlan0'
 
 
 @background(schedule=60)
@@ -22,23 +22,21 @@ def demo_task(self, message):
 
 @background(schedule=60)
 def scan():
-    logger.debug('[SCAN] Debut du scan')
+    scan_now()
+
+def scan_now():
+    logger.info('[SCAN] Debut du scan')
     for adresse in liste_address():
         mythread = Ping(adresse)
         mythread.start()
 
-def test_scan():
-    logger.debug('[SCAN] Debut du scan')
-    for adresse in liste_address():
-        mythread = Ping(adresse)
-        mythread.start()
 
 
 def get_addr():
-    return ni.ifaddresses('eth0')[2][0]['addr']
+    return ni.ifaddresses('wlan0')[2][0]['addr']
 
 def get_netmask():
-    return ni.ifaddresses('eth0')[2][0]['netmask']
+    return ni.ifaddresses('wlan0')[2][0]['netmask']
 
 def liste_address():
     adresse = get_addr() + "/" + get_netmask()
@@ -61,16 +59,18 @@ class Ping(threading.Thread):
         record = NetworkDatabase.objects.filter(ip=str(self.host), mac=mac_)
         if ping_return and not record.exists():
             NetworkDatabase(ip=str(self.host), mac=str(mac_), time_last=str(my_time), confiance="NON", statut="ACTIVE").save()
-            logger.debug("[SCAN] Nouvelle enregistrement avec ip: {0} et mac: {1}".format(str(self.host), mac_))
+            logger.info("[SCAN] Nouvelle enregistrement avec ip: {0} et mac: {1}".format(str(self.host), mac_))
         elif ping_return and record.exists():
-            record[0].time=my_time
-            record[0].statut="ACTIVE"
-            record[0].save()
-            logger.debug("[SCAN] Mise a jour avec ip: {0} et mac: {1}".format(str(self.host), mac_))
+            element = record[0]
+            element.time_last = str(my_time)
+            element.statut = "ACTIVE"
+            element.save()
+            logger.info("[SCAN] Mise a jour avec ip: {0} et mac: {1}".format(str(self.host), mac_))
         elif not ping_return and record.exists():
-            record[0].statut="NOT_ACTIVE"
-            record[0].save()
-            logger.debug("[SCAN] Mise a jour avec ip: {0} et mac: {1}".format(str(self.host), mac_))
+            element = record[0]
+            element.statut = "NOT_ACTIVE"
+            element.save()
+            logger.info("[SCAN] Mise a jour avec ip: {0} et mac: {1}".format(str(self.host), mac_))
 
     def ping(self):
         commande = "ping -c 1 " + str(self.host)
@@ -81,14 +81,14 @@ def get_mac(hostname):
     if hostname == get_addr():
         return "MON_ADRESSE"
     commande = "arp -n " + hostname
-    logger.debug(commande)
+    logger.info(commande)
     try:
         s = str(subprocess.check_output(commande, shell=True))
-        logger.debug(s)
+        logger.info(s)
         a = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", s)
         if a == None:
             return "NULL"
-        logger.debug(a)
+        logger.info(a)
         return re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", s).groups()[0]
     except subprocess.CalledProcessError:
         return ""
