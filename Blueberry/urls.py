@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^settings/$', Main_UI.settings, name='settings'),
     url(r'^task/$', Network_Analyst.tasks, name='task'),
     url(r'^about/$', Main_UI.about, name='about'),
-    url(r'^delete/(?P<ip_d>.+)/(?P<mac_d>.+)$', Main_UI.delete_entry, name='delete')
+    url(r'^delete/(?P<ip_d>.+)/(?P<mac_d>.+)$', Main_UI.delete_entry, name='delete'),
+    url(r'^info/(?P<ip_d>.+)/(?P<mac_d>.+)$', Main_UI.info, name='info')
     # url(r'^network_analyst/', include('Network_Analyst.urls')),
 ]

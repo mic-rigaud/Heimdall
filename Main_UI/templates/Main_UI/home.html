@@ -12,11 +12,11 @@
     <table class="table" >
         <thead>
             <tr>
+                <th></th>
                 <th>IP</th>
                 <th>MAC</th>
                 <th>Heure de la derniere observation</th>
                 <th>Confiance</th>
-                <th>Activité</th>
                 <th>Supprimé?</th>
         </th>
             </tr>
@@ -24,12 +24,22 @@
         <tbody>
             {% for element in database %}
             <tr>
-                <th>{{ element.ip }}</th>
+                <th>{% if element.statut == "ACTIVE" %}
+                    <span class="glyphicon glyphicon-ok" style="color:green"></span>
+                    {% else %}
+                    <span class="glyphicon glyphicon-remove" style="color:red"></span>
+                    {% endif %}
+                </th>
+                <th><a href="{% url 'info' element.ip element.mac %}" style="color:black">{{ element.ip }}</a></th>
                 <th>{{ element.mac }}</th>
                 <th>{{ element.time_last }}</th>
-                <th>{{ element.confiance }}</th>
-                <th>{{ element.statut }}</th>
-                <th><a class="btn btn-danger " href="{% url 'delete' element.ip element.mac %}"><span class="glyphicon glyphicon-remove"></span></a></th>
+                <th>{% if element.confiance == "NON" %}
+                    <span class="glyphicon glyphicon-thumbs-down" style="font-size:1.5em"></span>
+                    {% else %}
+                    <span class="glyphicon glyphicon-thumbs-up" style="font-size:1.5em"></span>
+                    {% endif %}
+                </th>
+                <th><a class="btn btn-danger " href="{% url 'delete' element.ip element.mac %}"><span class="glyphicon glyphicon-trash"></span></a></th>
             </tr>
             {% endfor %}
         </tbody>

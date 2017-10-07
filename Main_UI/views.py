@@ -20,3 +20,7 @@ def delete_entry(request, ip_d, mac_d):
     element = NetworkDatabase.objects.get(ip=ip_d, mac=mac_d)
     element.delete()
     return redirect('home')
+
+def info(request, ip_d, mac_d):
+    element = NetworkDatabase.objects.get(ip=ip_d, mac=mac_d)
+    return render(request, 'Main_UI/info.html', locals())

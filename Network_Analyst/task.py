@@ -12,7 +12,7 @@ import re
 logger = getLogger(__name__)
 
 FNULL = open(os.devnull, 'w')
-INTERFACE = 'wlan0'
+INTERFACE = 'eth0'
 
 
 @background(schedule=60)
@@ -26,6 +26,10 @@ def scan():
 
 def scan_now():
     logger.info('[SCAN] Debut du scan')
+    database = NetworkDatabase.objects.filter(statut="ACTIVE")
+    for element in database:
+        element.statut = "NON_ACTIVE"
+        element.save()
     for adresse in liste_address():
         mythread = Ping(adresse)
         mythread.start()
@@ -33,10 +37,10 @@ def scan_now():
 
 
 def get_addr():
-    return ni.ifaddresses('wlan0')[2][0]['addr']
+    return ni.ifaddresses('eth0')[2][0]['addr']
 
 def get_netmask():
-    return ni.ifaddresses('wlan0')[2][0]['netmask']
+    return ni.ifaddresses('eth0')[2][0]['netmask']
 
 def liste_address():
     adresse = get_addr() + "/" + get_netmask()
