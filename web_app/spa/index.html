@@ -9,13 +9,27 @@
         <meta name="author" content="Mic-rigaud">
         <meta name="description" content="Blueberry">
 
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/sticky-footer-navbar.css' %}" />
+        <!-- Load CSS -->
+        <link rel="stylesheet" href="spa/assets/css/blog.css">
+        <link rel="stylesheet" href="spa/assets/css/sticky-footer-navbar.css">
+
+        <!-- Load Bootstrap -->
+        <link rel="stylesheet" href="spa/assets/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" >
+        <link rel="stylesheet" href="spa/assets/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+
+        <!-- CDN AngularJs -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.9/angular-nvd3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+
+        <!-- app.js -->
+        <script src="spa/app/app.js" ></script>
+
+
     </head>
-    <body class="site">
-        <nav class="navbar navbar-default">
+    <body class="site" ng-app="Blueberry">
+        <nav ng-controler="NavCtrl" class="navbar navbar-default">
             <div class="container" >
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -29,19 +43,15 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                    {% block nav %}
                     <ul class="nav navbar-nav">
                         <li><a href="/settings/">Setting</a></li>
                         <li><a href="/about/">Info</a></li>
                     </ul>
-                    {% endblock %}
                 </div>
             </div>
         </nav>
 
-        <div class="container" role="main" style="margin-bottom:60px;" >
-            {% block content %}{% endblock %}
-        </div>
+        <div ng-view></div>
 
         <footer class="footer">
             <div class="container" >
