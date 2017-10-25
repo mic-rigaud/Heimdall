@@ -3,7 +3,9 @@
 import logging
 import sqlite3
 
-class NetworkDatabase(object):
+class NetworkElementsDatabase(object):
+
+
     def __init__(self, filename="network.db"):
         self.dbfilename = filename
         db = sqlite3.connect(self.dbfilename)

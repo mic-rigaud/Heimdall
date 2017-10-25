@@ -14,7 +14,7 @@ INTERFACE = 'wlan0'
 
 NETWORKSTATUS = {}
 
-class Scan(threading.Thread):
+class PingScan(threading.Thread):
     def __init__(self, database):
         threading.Thread.__init__(self)
         self.myDatabase = database
