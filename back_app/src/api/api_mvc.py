@@ -5,7 +5,6 @@ import sqlite3
 
 class NetworkElementsDatabase(object):
 
-
     def __init__(self, filename="network.db"):
         self.dbfilename = filename
         db = sqlite3.connect(self.dbfilename)
@@ -72,7 +71,6 @@ class NetworkElementsDatabase(object):
         c.execute('SELECT * from records WHERE ip=? AND mac=?', (ip,mac,))
         records = c.fetchall()
         c.close()
-        logging.info(records)
         if len(records) != 0 :
             return records[0]
         else:

@@ -8,13 +8,32 @@ Blueberry
 '''
 
 import logging
+import configparser
 import time
-import yaml
-from Strawberry.lib import Network
-from Strawberry.lib import myyaml
-from Strawberry.lib import TtyUi
-from Strawberry.lib import NetworkDatabase
-
 
 logging.basicConfig(filename='./log/blueberry.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+from src.api.api_mvc import NetworkElementsDatabase
+from src.api.api_telegram import ApiTelegram
+from src.scans.ping_scan import PingScan
+
+config = configparser.ConfigParser()
+config.read('./config/config.ini')
+if not config:
+    logging.error('No config file found!')
+    exit
+
+
+if __name__=="__main__":
+    logging.info("Initialisation de Blueberry")
+    database = NetworkElementsDatabase()
+    try:
+        while 1:
+            logging.info("Demarrage d'un {} scan".format(config.get("scan", "type")))
+            net = PingScan(database, config)
+            net.start()
+            time.sleep(int(config.get("scan", "time_enter_scan")))
+    except KeyboardInterrupt:
+        logging.info("Extinction de Blueberry")
+        exit

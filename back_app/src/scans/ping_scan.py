@@ -9,18 +9,24 @@ import ipaddress
 import time
 import re
 
+from src.api.api_telegram import ApiTelegram
+
 FNULL = open(os.devnull, 'w')
 INTERFACE = 'wlan0'
 
 NETWORKSTATUS = {}
 
 class PingScan(threading.Thread):
-    def __init__(self, database):
+    def __init__(self, database, config):
         threading.Thread.__init__(self)
-        self.myDatabase = database
+        global INTERFACE
+        global CONFIG
+        self.database = database
+        CONFIG = config
+        INTERFACE = config.get("interface","interface")
 
     def run(self):
-        scan(self.myDatabase)
+        scan(self.database)
 
 class Ping(threading.Thread):
     '''
@@ -38,6 +44,9 @@ class Ping(threading.Thread):
         record = self.myDatabase.get_record_from_ip_mac(str(self.host), mac)
         if ping_return and record == "":
             self.myDatabase.add_record(str(self.host), mac, my_time, "NON", "ACTIF")
+            ApiTelegram(CONFIG.get("telegram", "token")).send_alert("Un nouveau peripherique "+
+            "qui n est pas de confiance s est connecte \n"+
+            "  ip : {} \n  mac : {}".format(str(self.host), mac))
         elif ping_return and record != "":
             self.myDatabase.update_record(record[0], str(self.host), mac, my_time, "NON", "ACTIF")
         elif not ping_return and record != "":
@@ -47,14 +56,11 @@ def get_mac(hostname):
     if hostname == get_addr():
         return "MON_ADRESSE"
     commande = "arp -n " + hostname
-    logging.info(commande)
     try:
         s = str(subprocess.check_output(commande, shell=True))
-        logging.info(s)
         a = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", s)
         if a == None:
             return "NULL"
-        logging.info(a)
         return re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", s).groups()[0]
     except subprocess.CalledProcessError:
         return ""
