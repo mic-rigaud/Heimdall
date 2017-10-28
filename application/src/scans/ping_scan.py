@@ -6,10 +6,11 @@ import threading
 import netifaces as ni
 import logging
 import ipaddress
-import time
+import datetime
 import re
 
 from src.api.api_telegram import ApiTelegram
+from src.api.api_bdd import *
 
 FNULL = open(os.devnull, 'w')
 INTERFACE = 'wlan0'
@@ -17,40 +18,45 @@ INTERFACE = 'wlan0'
 NETWORKSTATUS = {}
 
 class PingScan(threading.Thread):
-    def __init__(self, database, config):
+    def __init__(self):
         threading.Thread.__init__(self)
         global INTERFACE
-        global CONFIG
-        self.database = database
-        CONFIG = config
-        INTERFACE = config.get("interface","interface")
+        INTERFACE = Parametre.get(Parametre.section == "interface",
+                                  Parametre.key=="interface").value
 
     def run(self):
-        scan(self.database)
+        for adresse in liste_address():
+            mythread = Ping(adresse)
+            mythread.start()
 
 class Ping(threading.Thread):
     '''
     Ping: Cette classe permet de realiser les ping sur les differents host
     '''
-    def __init__(self, host, database):
+    def __init__(self, host):
         threading.Thread.__init__(self)
         self.host = host
-        self.myDatabase = database
 
     def run(self):
         mac = get_mac(str(self.host))
         ping_return = ping(str(self.host))
-        my_time = time.asctime( time.localtime(time.time()) )
-        record = self.myDatabase.get_record_from_ip_mac(str(self.host), mac)
-        if ping_return and record == "":
-            self.myDatabase.add_record(str(self.host), mac, my_time, "NON", "ACTIF")
-            ApiTelegram(CONFIG.get("telegram", "token")).send_alert("Un nouveau peripherique "+
+        record = Ip.select().where((Ip.ip == str(self.host)) & (Ip.mac == mac))
+        if ping_return and not record.exists():
+            Ip.create(ip=str(self.host), mac=mac).save()
+            telegram_token = Parametre.get(Parametre.section == "telegram" , Parametre.key == "token")
+            telegram_chat_id = Parametre.get(Parametre.section == "telegram" , Parametre.key == "chat_id")
+            ApiTelegram(telegram_token.value).send_alert("Un nouveau peripherique "+
             "qui n est pas de confiance s est connecte \n"+
-            "  ip : {} \n  mac : {}".format(str(self.host), mac))
-        elif ping_return and record != "":
-            self.myDatabase.update_record(record[0], str(self.host), mac, my_time, "NON", "ACTIF")
-        elif not ping_return and record != "":
-            self.myDatabase.update_record(record[0], str(self.host), mac, my_time, "NON", "PLUS_ACTIF")
+            "  ip : {} \n  mac : {}".format(str(self.host), mac), telegram_chat_id.value)
+        elif ping_return and record.exists():
+            element = record.get()
+            element.time_last = datetime.datetime.now()
+            element.save()
+        elif not ping_return and record.exists():
+            element = record.get()
+            element.satus = False
+            element.save()
+
 
 def get_mac(hostname):
     if hostname == get_addr():
@@ -80,9 +86,3 @@ def liste_address():
     adresse = get_addr() + "/" + get_netmask()
     net = ipaddress.IPv4Interface(adresse)
     return net.network.hosts()
-
-
-def scan(database):
-    for adresse in liste_address():
-        mythread = Ping(adresse, database)
-        mythread.start()

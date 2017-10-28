@@ -1,0 +1,12 @@
+# Il faut completer ce fichier puis le renommer config.ini
+[interface]
+interface =
+
+
+[telegram]
+token =
+chat_id =
+
+[scan]
+type =
+time_enter_scan =

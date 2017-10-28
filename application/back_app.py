@@ -14,26 +14,22 @@ import time
 logging.basicConfig(filename='./log/blueberry.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-from src.api.api_mvc import NetworkElementsDatabase
 from src.api.api_telegram import ApiTelegram
 from src.scans.ping_scan import PingScan
-
-config = configparser.ConfigParser()
-config.read('./config/config.ini')
-if not config:
-    logging.error('No config file found!')
-    exit
-
+from src.api.api_bdd import *
 
 if __name__=="__main__":
     logging.info("Initialisation de Blueberry")
-    database = NetworkElementsDatabase()
     try:
         while 1:
-            logging.info("Demarrage d'un {} scan".format(config.get("scan", "type")))
-            net = PingScan(database, config)
+            scan_type = Parametre.get(Parametre.section == "scan",
+                                      Parametre.key == "type").value
+            scan_time = Parametre.get(Parametre.section == "scan",
+                                      Parametre.key == "time_enter_scan").value
+            logging.info("Demarrage d'un {} scan".format(scan_type))
+            net = PingScan()
             net.start()
-            time.sleep(int(config.get("scan", "time_enter_scan")))
+            time.sleep(int(scan_time))
     except KeyboardInterrupt:
         logging.info("Extinction de Blueberry")
         exit
