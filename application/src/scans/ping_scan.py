@@ -9,8 +9,8 @@ import ipaddress
 import datetime
 import re
 
-from src.api.api_telegram import ApiTelegram
-from src.api.api_bdd import *
+from application.src.api.api_telegram import ApiTelegram
+from application.src.api.api_bdd import *
 
 FNULL = open(os.devnull, 'w')
 INTERFACE = 'wlan0'

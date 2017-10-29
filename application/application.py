@@ -8,17 +8,13 @@ Blueberry
 '''
 
 import logging
-import configparser
 import time
 
-logging.basicConfig(filename='./log/blueberry.log',
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+from application.src.api.api_telegram import ApiTelegram
+from application.src.scans.ping_scan import PingScan
+from application.src.api.api_bdd import *
 
-from src.api.api_telegram import ApiTelegram
-from src.scans.ping_scan import PingScan
-from src.api.api_bdd import *
-
-if __name__=="__main__":
+def main():
     logging.info("Initialisation de Blueberry")
     try:
         while 1:

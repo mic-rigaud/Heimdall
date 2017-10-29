@@ -22,14 +22,6 @@ class Parametre(BaseModel):
     key = CharField(unique=True)
     value = CharField()
 
-
-
-# db.connect()
-# db.create_tables([Ip, Parametre])
-
-
-# class Tweet(BaseModel):
-#     user = ForeignKeyField(User, related_name='tweets')
-#     message = TextField()
-#     created_date = DateTimeField(default=datetime.datetime.now)
-#     is_published = BooleanField(default=True)
+class Task(BaseModel):
+    action = CharField()
+    time = DateTimeField(default=datetime.datetime.now)

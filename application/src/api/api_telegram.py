@@ -24,13 +24,6 @@ class ApiTelegram():
         js = self.get_json_from_url(url)
         return js
 
-    def get_chat_id(self, updates):
-        ids = []
-        for i in range(len(updates["result"])):
-            chat_id = updates["result"][i]["message"]["chat"]["id"]
-            ids.append(chat_id)
-        return ids
-
     def send_message(self, text, chat_id):
         url = self.URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
         self.get_url(url)
