@@ -16,7 +16,11 @@ class ApiTelegram():
 
     def get_json_from_url(self, url):
         content = self.get_url(url)
-        js = json.loads(content)
+        try:
+            js = json.loads(content)
+        except:
+            logging.error("La réponse recut par l api telegram n'est pas au format json")
+            js = "Error"
         return js
 
     def get_updates(self):
