@@ -14,6 +14,7 @@ import time
 logging.basicConfig(filename='./logs/blueberry.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
 from application.application import *
 
 

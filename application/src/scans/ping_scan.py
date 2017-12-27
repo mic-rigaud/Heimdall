@@ -13,8 +13,7 @@ from application.src.api.api_telegram import ApiTelegram
 from application.src.api.api_bdd import *
 
 FNULL = open(os.devnull, 'w')
-INTERFACE = 'wlan0'
-
+INTERFACE = "wlan0"
 NETWORKSTATUS = {}
 
 class PingScan(threading.Thread):
@@ -22,7 +21,7 @@ class PingScan(threading.Thread):
         threading.Thread.__init__(self)
         global INTERFACE
         INTERFACE = Parametre.get(Parametre.section == "interface",
-                                  Parametre.key=="interface").value
+                                  Parametre.key == "interface").value
 
     def run(self):
         for adresse in liste_address():
@@ -45,9 +44,9 @@ class Ping(threading.Thread):
             Ip.create(ip=str(self.host), mac=mac).save()
             telegram_token = Parametre.get(Parametre.section == "telegram" , Parametre.key == "token")
             telegram_chat_id = Parametre.get(Parametre.section == "telegram" , Parametre.key == "chat_id")
-            ApiTelegram(telegram_token.value).send_alert("Un nouveau peripherique "+
-            "qui n est pas de confiance s est connecte \n"+
-            "  ip : {} \n  mac : {}".format(str(self.host), mac), telegram_chat_id.value)
+            ApiTelegram(telegram_token.value).send_alert("Un nouveau peripherique " +
+                        "qui n est pas de confiance s est connecte \n" +
+                        "  ip : {} \n  mac : {}".format(str(self.host), mac), telegram_chat_id.value)
         elif ping_return and record.exists():
             element = record.get()
             element.time_last = datetime.datetime.now()
@@ -77,7 +76,13 @@ def ping(hostname):
     return bool(response == 0)
 
 def get_addr():
-    return ni.ifaddresses(INTERFACE)[2][0]['addr']
+    try:
+        resultat = ni.ifaddresses(INTERFACE)[2][0]['addr']
+    except:
+        logging.exception("Erreur lors de la recherche de l'adresse ip. Probablement une erreur de configuration. L'interface d'écoute ne doit pas etre " + INTERFACE)
+        print("=== ERREUR ===")
+        exit()
+    return resultat
 
 def get_netmask():
     return ni.ifaddresses(INTERFACE)[2][0]['netmask']
