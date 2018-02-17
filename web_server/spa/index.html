@@ -1,62 +1,82 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{% block title %}Blueberry{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="all">
-        <meta name="author" content="Mic-rigaud">
-        <meta name="description" content="Blueberry">
 
-        <!-- Load CSS -->
-        <link rel="stylesheet" href="spa/assets/css/blog.css">
-        <link rel="stylesheet" href="spa/assets/css/sticky-footer-navbar.css">
+<html lang="en">
 
-        <!-- Load Bootstrap -->
-        <link rel="stylesheet" href="spa/assets/libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" >
-        <link rel="stylesheet" href="spa/assets/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+<head>
+    <meta charset="UTF-8">
+    <title>Template</title>
 
-        <!-- CDN AngularJs -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.9/angular-nvd3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <!-- CDN CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-        <!-- app.js -->
-        <script src="spa/app/app.js" ></script>
+    <!-- CDN AngularJs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+
+    <!-- Load environment variables -->
+    <script src="spa/env/env.js"></script>
+
+    <!-- app.js -->
+    <script src="spa/app.js"></script>
+
+    <!-- app.core.js -->
+    <script src="spa/angular/core/navbarctrl.js"></script>
+
+    <!-- app.services.js -->
 
 
-    </head>
-    <body class="site" ng-app="Blueberry">
-        <nav ng-controler="NavCtrl" class="navbar navbar-default">
-            <div class="container" >
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">
-                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-                    <ul class="nav navbar-nav">
-                        <li><a href="/settings/">Setting</a></li>
-                        <li><a href="/about/">Info</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <!-- app.viewctrl.js -->
 
-        <div ng-view></div>
 
-        <footer class="footer">
-            <div class="container" >
-                &copy; Blueberry
-            </div>
-        </footer>
-    </body>
+    <!-- dependency.js -->
+
+
+    <!-- app.css -->
+    <link href="spa/global.css" rel="stylesheet">
+
+</head>
+
+<body ng-app="NodeChain">
+
+    <nav ng-controller="NavCtrl" class="navbar navbar-expand-sm navbar-dark" style="color:white;background-color:#E37222">
+
+        <div style="font-size:1.5em;vertical-align:bottom;font-weight:bold;margin-right:1em;">Template</div>
+
+        <ul class="navbar-nav mr-auto mt-2 mt-xl-0">
+
+            <li ng-class="{ 'nav-item active': isActive('/')}">
+                <a class="nav-link" href="#!/">Blueberry</a>
+            </li>
+
+            <li ng-class="{ 'nav-item active': isActive('/carto')}">
+                <a class="nav-link" href="#!/carto">Cartographie</a>
+            </li>
+
+            <li ng-class="{ 'nav-item active': isActive('/outils')}">
+                <a class="nav-link" href="#!/outils">Outils Utils</a>
+            </li>
+
+            <li ng-class="{ 'nav-item active': isActive('/fiches-reflexes')}">
+                <a class="nav-link" href="#!/fiches-reflexes">Fiches Reflexes</a>
+            </li>
+
+            <li ng-class="{ 'nav-item active': isActive('/configuration')}">
+                <a class="nav-link" href="#!/configuration">Configuration</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <h1>Simple template</h1>
+    <h2>Made by Guillaume Neau</h2>
+    <h3>Python Flask - AngularJS - Boostrap 4</h3>
+
+    <div ng-view></div>
+
+</body>
+
+
 </html>
