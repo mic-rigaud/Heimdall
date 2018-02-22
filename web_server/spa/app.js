@@ -1,3 +1,12 @@
+/**
+ * @Date:   17-Feb-2018
+ * @Project: Blueberry
+ * @Last modified time: 22-Feb-2018
+ * @License: GNU GPL v3
+ */
+
+
+
 // Boostraping env
 var env = {};
 if(window){

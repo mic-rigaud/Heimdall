@@ -8,5 +8,7 @@ token =
 chat_id =
 
 [scan]
+# Type de scan à réaliser.
+# Types possible: ping, arp
 type =
 time_enter_scan =
