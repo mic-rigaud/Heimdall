@@ -4,83 +4,47 @@
 @Last modified time: 22-Feb-2018
 @License: GNU GPL v3
 -->
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Blueberry</title>
-        <!-- CDN CSS -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-        <!-- CDN AngularJs -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Blueberry</title>
+    <!-- CDN CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <!-- CDN AngularJs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <!-- Load environment variables -->
+    <script src="spa/env/env.js"></script>
+    <!-- app.js -->
+    <script src="spa/app.js"></script>
+    <!-- app.core.js -->
+    <script src="spa/angular/core/navbarctrl.js"></script>
+    <script src="spa/angular/carto/cartoctrl.js"></script>
+    <script src="spa/angular/outils/outilsctrl.js"></script>
+    <script src="spa/angular/fiches-reflexes/fichesctrl.js"></script>
+    <script src="spa/angular/configuration/configurationctrl.js"></script>
+    <!-- app.css -->
+    <link href="spa/global.css" rel="stylesheet"> </head>
 
-        <!-- Load environment variables -->
-        <script src="spa/env/env.js"></script>
-        <!-- app.js -->
-        <script src="spa/app.js"></script>
+  <body ng-app="NodeChain">
+    <nav ng-controller="NavCtrl" class="navbar navbar-expand-sm navbar-dark" style="color:white;background-color:#50B3F8">
+      <div style="font-size:1.5em;vertical-align:bottom;font-weight:bold;margin-right:1em;">Blueberry</div>
+      <ul class="navbar-nav mr-auto mt-2 mt-xl-0">
+        <li ng-class="{ 'nav-item active': isActive('/')}"> <a class="nav-link" href="#!/">Home</a> </li>
+        <li ng-class="{ 'nav-item active': isActive('/carto')}"> <a class="nav-link" href="#!/carto">Cartographie</a> </li>
+        <li ng-class="{ 'nav-item active': isActive('/outils')}"> <a class="nav-link" href="#!/outils">Outils Utiles</a> </li>
+        <li ng-class="{ 'nav-item active': isActive('/fiches-reflexes')}"> <a class="nav-link" href="#!/fiches-reflexes">Fiches Reflexes</a> </li>
+        <li ng-class="{ 'nav-item active': isActive('/configuration')}"> <a class="nav-link" href="#!/configuration">Configuration</a> </li>
+      </ul>
+    </nav>
+    <div class="container" style="background-color:#FFFFFF;margin-top:1%;height:90%">
+      <div ng-view> </div>
+    </div>
+  </body>
 
-        <!-- app.core.js -->
-        <script src="spa/angular/core/navbarctrl.js"></script>
-
-        <!-- app.services.js -->
-
-
-        <!-- app.viewctrl.js -->
-
-
-        <!-- dependency.js -->
-
-
-        <!-- app.css -->
-        <link href="spa/global.css" rel="stylesheet">
-
-    </head>
-
-    <body ng-app="NodeChain">
-
-        <nav ng-controller="NavCtrl" class="navbar navbar-expand-sm navbar-dark" style="color:white;background-color:#50B3F8">
-            <div style="font-size:1.5em;vertical-align:bottom;font-weight:bold;margin-right:1em;">Blueberry</div>
-            <ul class="navbar-nav mr-auto mt-2 mt-xl-0">
-
-                <li ng-class="{ 'nav-item active': isActive('/')}">
-                    <a class="nav-link" href="#!/">Home</a>
-                </li>
-
-                <li ng-class="{ 'nav-item active': isActive('/carto')}">
-                    <a class="nav-link" href="#!/carto">Cartographie</a>
-                </li>
-
-                <li ng-class="{ 'nav-item active': isActive('/outils')}">
-                    <a class="nav-link" href="#!/outils">Outils Utiles</a>
-                </li>
-
-                <li ng-class="{ 'nav-item active': isActive('/fiches-reflexes')}">
-                    <a class="nav-link" href="#!/fiches-reflexes">Fiches Reflexes</a>
-                </li>
-
-                <li ng-class="{ 'nav-item active': isActive('/configuration')}">
-                    <a class="nav-link" href="#!/configuration">Configuration</a>
-                </li>
-
-            </ul>
-
-        </nav>
-        <!--
-             <h1>Simple template</h1>
-             <h2>Made by Guillaume Neau</h2>
-             <h3>Python Flask - AngularJS - Boostrap 4</h3> -->
-
-        <div class="container" style="background-color:#FFFFFF;margin-top:1%;height:90%">
-            <div ng-view>
-            </div>
-        </div>
-    </body>
 </html>

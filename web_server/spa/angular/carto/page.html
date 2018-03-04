@@ -4,12 +4,8 @@
 @Last modified time: 22-Feb-2018
 @License: GNU GPL v3
 -->
-
-
-
 <main class="px-4 pt-3" role="main">
-  <h1>Cartographie</h1>
-  <br />
+  <h1>Cartographie</h1> <br />
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -24,13 +20,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>tt</th>
-          <th>gg</th>
-          <th>hh</th>
-          <th>kk</th>
-          <th>hh</th>
-          <th>jj</th>
+        <tr ng-repeat="element in datafromapi">
+          <th>{{element.status}}</th>
+          <th>{{element.ip}}</th>
+          <th>{{element.mac}}</th>
+          <th>{{element.time_last}}</th>
+          <th>{{element.confiance}}</th>
+          <th>??</th>
         </tr>
       </tbody>
     </table>
