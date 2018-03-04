@@ -1,3 +1,13 @@
+# @Author: michael
+# @Date:   18-Jan-2018
+# @Project: Blueberry
+# @Filename: base.py
+# @Last modified by:   michael
+# @Last modified time: 04-Mar-2018
+# @License: GNU GPL v3
+
+
+
 from flask import Blueprint
 from flask_restful import Api, Resource
 
@@ -17,6 +27,7 @@ class ApiBaseResource(Resource):
 
     def POST(self):
         return 'Not implemented'
+
 
 class BluePrintContainer:
 

@@ -1,11 +1,15 @@
+# @Author: michael
+# @Date:   01-Dec-2017
+# @Project: Blueberry
+# @Filename: application.py
+# @Last modified by:   michael
+# @Last modified time: 04-Mar-2018
+# @License: GNU GPL v3
+
+
+
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-'''
-Blueberry
-  auteurs: michael
-  version: 0.1
-  date: 23/10/2017
-'''
 
 import logging
 import time
@@ -16,7 +20,7 @@ from application.src.api.api_bdd import *
 from application.src.scans.ping_scan import PingScan
 from application.src.scans.arp_scan import ArpScan
 
-def main():
+def application_main():
     logging.info("Initialisation de Blueberry")
     try:
         while 1:
