@@ -9,9 +9,19 @@
 
 var NodeChain = angular.module('NodeChain');
 
-NodeChain.controller("CartoCtrl", function($scope, $location, $http) {
-  $http.get('./api-v0.0/ip').
-  then(function(response) {
-    $scope.datafromapi = response.data;
+NodeChain.service("http_rest", function($http) {
+  this.get = function(addr) {
+    var promise = $http.get(addr).
+    then(function(response) {
+      return response.data;
+    });
+    return promise;
+  }
+})
+
+
+NodeChain.controller("CartoCtrl", function($scope, $location, http_rest) {
+  http_rest.get('./api-v0.0/ip').then(function(response) {
+    $scope.datafromapi = response
   });
 })

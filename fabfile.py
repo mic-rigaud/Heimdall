@@ -2,7 +2,7 @@
 # @Date:   22-Feb-2018
 # @Project: Blueberry
 # @Last modified by:   michael
-# @Last modified time: 04-Mar-2018
+# @Last modified time: 06-Mar-2018
 # @License: GNU GPL v3
 
 import configparser
@@ -32,6 +32,7 @@ logging.basicConfig(
 
 
 def test():
+    # TODO: Faire les tests et le plan de Test
     local("nosetests tests")
 
 
