@@ -18,22 +18,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <!-- Load environment variables -->
     <script src="spa/env/env.js"></script>
     <!-- app.js -->
-    <script src="spa/app.js"></script>
+    <script src="spa/app.module.js"></script>
+    <script src="spa/app.config.js"></script>
     <!-- app.core.js -->
-    <script src="spa/angular/core/navbarctrl.js"></script>
-    <script src="spa/angular/carto/cartoctrl.js"></script>
-    <script src="spa/angular/outils/outilsctrl.js"></script>
-    <script src="spa/angular/fiches-reflexes/fichesctrl.js"></script>
-    <script src="spa/angular/configuration/configurationctrl.js"></script>
-    <script src="spa/angular/index/indexctrl.js"></script>
-    <!-- app.css -->
+    <script src="spa/app/core/navbarctrl.js"></script>
+
+    <!-- Ajout module carto -->
+    <script src="spa/app/carto/carto.module.js"></script>
+    <script src="spa/app/carto/carto.component.js"></script>
+    <!-- Ajout module configuration -->
+    <script src="spa/app/configuration/configuration.module.js"></script>
+    <script src="spa/app/configuration/configuration.component.js"></script>
+    <!-- Ajout module fiches-reflexes -->
+    <script src="spa/app/fiches-reflexes/fiches-reflexes.module.js"></script>
+    <script src="spa/app/fiches-reflexes/fiches-reflexes.component.js"></script>
+    <!-- Ajout module home -->
+    <script src="spa/app/home/home.module.js"></script>
+    <script src="spa/app/home/home.component.js"></script>
+    <!-- Ajout module outils -->
+    <script src="spa/app/outils/outils.module.js"></script>
+    <script src="spa/app/outils/outils.component.js"></script>
+
     <link href="spa/global.css" rel="stylesheet"> </head>
 
-  <body ng-app="NodeChain">
+  <body ng-app="Blueberry">
     <nav ng-controller="NavCtrl" class="navbar navbar-expand-sm navbar-dark" style="color:white;background-color:#50B3F8">
       <div style="font-size:1.5em;vertical-align:bottom;font-weight:bold;margin-right:1em;">Blueberry</div>
       <ul class="navbar-nav mr-auto mt-2 mt-xl-0">
@@ -45,7 +57,9 @@
       </ul>
     </nav>
     <div class="container" style="background-color:#FFFFFF;margin-top:1%;height:90%">
+
       <div ng-view> </div>
+
     </div>
   </body>
 

@@ -7,9 +7,9 @@
 
 
 
-var NodeChain = angular.module('NodeChain');
+var Blueberry = angular.module('Blueberry');
 
-NodeChain.controller("NavCtrl", function($scope,$location) {
+Blueberry.controller("NavCtrl", function($scope,$location) {
    $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
