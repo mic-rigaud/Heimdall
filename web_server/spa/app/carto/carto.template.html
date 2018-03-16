@@ -6,6 +6,7 @@
 -->
 <main class="px-4 pt-3" role="main">
   <h1>Cartographie</h1> <br />
+
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -13,22 +14,36 @@
           <th></th>
           <th>IP</th>
           <th>MAC</th>
-          <th>Heure de la derniere observation</th>
-          <th>Confiance</th>
-          <th>Supprimé?</th>
+          <th style="text-align: center;">Heure de la derniere observation</th>
+          <th style="text-align: center;">Confiance</th>
+          <th style="text-align: center;">Supprimé?</th>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="element in $ctrl.datafromapi">
-          <th>{{element.status}}</th>
+          <th>
+            <img width="15"  src="spa/app/carto/images/check.svg" alt="not present icon" ng-hide="!element.status"/>
+            <img width="15"  src="spa/app/carto/images/x.svg" alt="active icon" ng-hide="element.status"/>
+          </th>
           <th>{{element.ip}}</th>
           <th>{{element.mac}}</th>
-          <th>{{element.time_last}}</th>
-          <th>{{element.confiance}}</th>
-          <th>??</th>
+          <th style="text-align: center;">{{element.time_last}}</th>
+          <th style="text-align: center;">
+            <label class="switch">
+              <input type="checkbox" ng-checked="element.confiance" ng-model="confirmed" ng-change="changeConfiance(element.ip,element.mac)">
+              <span class="slider round"></span>
+            </label>
+          </th>
+          <th style="text-align: center;">
+            <button ng-click="delete(element.ip,element.mac)" class="btn btn-outline-danger">
+              <img width="15"  src="spa/app/carto/images/x.svg" alt="delete icon" />
+            </button>
+          </th>
         </tr>
       </tbody>
     </table>
   </div>
+
+
 </main>

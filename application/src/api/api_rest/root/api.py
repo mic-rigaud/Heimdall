@@ -3,7 +3,7 @@
 # @Project: Blueberry
 # @Filename: api.py
 # @Last modified by:   michael
-# @Last modified time: 04-Mar-2018
+# @Last modified time: 16-Mar-2018
 # @License: GNU GPL v3
 
 from application.src.api.api_bdd import *
@@ -31,7 +31,7 @@ class ApiIp(ApiBaseResource):
                 element.time_last.strftime("%Y-%m-%d %H:%M:%S"),
                 "confiance":
                 element.confiance,
-                "satus":
+                "status":
                 element.status
             }]
         return json_return
