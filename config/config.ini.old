@@ -2,6 +2,9 @@
 [interface]
 interface =
 
+[alert]
+# Valeur possible: telegram
+alert_type = telegram
 
 [telegram]
 token =
@@ -10,5 +13,5 @@ chat_id =
 [scan]
 # Type de scan à réaliser.
 # Types possible: ping, arp
-type =
-time_enter_scan =
+scan_type = ping
+time_enter_scan = 60
